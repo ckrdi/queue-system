@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String
+  password    String
+  status      String   @default("Active")
+  serveNumber Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  queuesCalled Queue[]
+}
+
+model Queue {
+  id         String     @id @default(cuid())
+  queueNo    String     @unique
+  type       QueueType
+  status     QueueStatus @default(Waiting)
+  calledAt   DateTime?
+  createdAt  DateTime   @default(now())
+
+  staffId String?
+  staff   User?   @relation(fields: [staffId], references: [id])
+
+  @@index([status])
+}
+
+enum QueueType {
+  Reservation
+  WalkIn
+}
+
+enum QueueStatus {
+  Waiting
+  Called
+  Done
+}
