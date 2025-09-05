@@ -1,6 +1,7 @@
 import { useAuthStore } from '@/stores/auth'
 import Dashboard from '@/views/Dashboard.vue'
 import Login from '@/views/Login.vue'
+import Users from '@/views/Users.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/login',
       component: Login,
       meta: { requireGuest: true }
+    },
+    {
+      path: '/users',
+      component: Users,
+      meta: { requireAuth: true }
     },
   ],
 })

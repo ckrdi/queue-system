@@ -2,14 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import api from '@/api'
 import to from 'await-to-js'
-
-type User = {
-  id: any,
-  email: string,
-  name: string,
-  status: string,
-  serveNumber: any,
-}
+import type { User } from '@/types/User'
 
 type LoginResponse = {
   token: string,

@@ -62,7 +62,7 @@ export class UsersController {
 
   @Patch(':id/active')
   async toggleActive(@Param('id') id: string, @Body() { active }: { active: boolean }) {
-    let sts = "Not Active"
+    let sts = "Inactive"
     if (active) sts = "Active"
     return await this.usersService.toggleActive(id, sts);
   }

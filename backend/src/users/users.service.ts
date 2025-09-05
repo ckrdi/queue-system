@@ -8,14 +8,14 @@ export class UsersService {
 
   async findAll() {
     return await this.prisma.user.findMany({
-      select: { id: true, name: true, email: true, status: true },
+      select: { id: true, name: true, email: true, status: true, serveNumber: true, createdAt: true },
     });
   }
 
   async findById(id: string) {
     return await this.prisma.user.findFirst({
       where: { id },
-      select: { id: true, name: true, email: true, status: true },
+      select: { id: true, name: true, email: true, status: true, serveNumber: true, createdAt: true },
     });
   }
 
@@ -27,7 +27,7 @@ export class UsersService {
     const hashed = await bcrypt.hash(data.password, 10);
     return await this.prisma.user.create({
       data: { ...data, password: hashed },
-      select: { id: true, name: true, email: true, status: true },
+      select: { id: true, name: true, email: true, status: true, serveNumber: true, createdAt: true },
     });
   }
 
@@ -35,7 +35,7 @@ export class UsersService {
     return await this.prisma.user.update({
       where: { id },
       data,
-      select: { id: true, name: true, email: true, status: true },
+      select: { id: true, name: true, email: true, status: true, serveNumber: true, createdAt: true },
     });
   }
 
