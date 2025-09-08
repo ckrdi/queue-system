@@ -48,6 +48,7 @@ export class UsersService {
     return await this.prisma.user.findMany({
       orderBy: { serveNumber: 'desc' },
       take: 3,
+      select: { id: true, name: true, email: true, status: true, serveNumber: true, createdAt: true },
     });
   }
 

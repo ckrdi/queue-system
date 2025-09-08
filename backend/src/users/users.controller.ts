@@ -35,6 +35,12 @@ export class UsersController {
     return await this.usersService.findAll();
   }
 
+  // top endpoint has to be registered first because there is :id (string) wildcard to get single user
+  @Get('top')
+  async top3() {
+    return await this.usersService.top3();
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.usersService.findById(id);
@@ -53,11 +59,6 @@ export class UsersController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.usersService.remove(id);
-  }
-
-  @Get('top3')
-  async top3() {
-    return await this.usersService.top3();
   }
 
   @Patch(':id/active')
